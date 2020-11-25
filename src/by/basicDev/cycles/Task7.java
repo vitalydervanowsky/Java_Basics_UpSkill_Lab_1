@@ -13,9 +13,11 @@ public class Task7 {
         number = line.split(" ");
         boolean[] numberIsPresent = new boolean[10];
         for (int i = 0; i < number[0].length(); i++) {
+            char symbolOne = number[0].charAt(i);
+            boolean currentNumberIsNotPresent = !numberIsPresent[Integer.parseInt(String.valueOf(number[0].charAt(i)))];
             for (int j = 0; j < number[1].length(); j++) {
-                if (number[0].charAt(i) == number[1].charAt(j) &&
-                        !numberIsPresent[Integer.parseInt(String.valueOf(number[0].charAt(i)))]) {
+                char symbolTwo = number[1].charAt(j);
+                if (symbolOne == symbolTwo && currentNumberIsNotPresent) {
                     numberIsPresent[Integer.parseInt(String.valueOf(number[0].charAt(i)))] = true;
                 }
             }
