@@ -11,12 +11,9 @@ public class Task10 {
         System.out.println();
         int[] b = new int[n];
         int counter = 0;
-        for (int i = 0; i < n; i++) {
-            if (i % 2 == 0) {
-                b[i - counter] = a[i];
-            } else {
-                counter++;
-            }
+        for (int i = 0; i < n; i+=2) {
+            b[i - counter] = a[i];
+            counter++;
         }
         for (int i = 0; i < n; i++) {
             System.out.print("b[" + i + "]=" + b[i] + "\t");
