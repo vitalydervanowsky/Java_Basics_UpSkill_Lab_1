@@ -4,13 +4,13 @@ package by.string.asArray;
 
 public class Task1 {
     public static void main(String[] args) {
-        String [] varOfArray = new String[5];
-        varOfArray[0] = "camelCase";
-        varOfArray[1] = "varOfArray";
-        varOfArray[2] = "StringBuilder";
-        varOfArray[3] = "codePointAt";
-        varOfArray[4] = "asArray";
-        for (String s : varOfArray) {
+        String [] arrayOfNames = new String[5];
+        arrayOfNames[0] = "camelCase";
+        arrayOfNames[1] = "arrayOfNames";
+        arrayOfNames[2] = "StringBuilder";
+        arrayOfNames[3] = "codePointAt";
+        arrayOfNames[4] = "asArray";
+        for (String s : arrayOfNames) {
             System.out.print(s + "   >>>>>   ");
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < s.length(); i++) {
