@@ -14,8 +14,7 @@ public class Task1 {
             System.out.print(s + "   >>>>>   ");
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < s.length(); i++) {
-                int codePoint = s.codePointAt(i);
-                if (codePoint >= 65 && codePoint <= 90 && i != 0) {
+                if (Character.isUpperCase(s.charAt(i)) && i != 0) {
                     builder.append("_");
                 }
                 builder.append(s.charAt(i));
