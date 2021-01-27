@@ -10,21 +10,11 @@ public class Task3 {
                 "4. В строке найти количество чисел.";
         int c = 0;
         for (int i = 0; i < str.length(); i++) {
-            if (isDigit(str.charAt(i))) {
+            if (Character.isDigit(str.charAt(i))) {
                 c++;
             }
         }
         System.out.println(str);
         System.out.println(c);
-    }
-
-    static boolean isDigit(char ch) {
-        String find = "0123456789";
-        for (int i = 0; i < find.length(); i++) {
-            if (ch == find.charAt(i)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
