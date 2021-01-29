@@ -12,7 +12,12 @@ public class Task10 {
                 "Строка X состоит из нескольких предложений, каждое из которых кончается точкой, \n" +
                 "восклицательным или вопросительным знаком? Определить количество предложений в строке X.";
         System.out.println(x);
-        String [] xArr = x.split("[.?!]");
-        System.out.println(xArr.length);
+        int c = 0;
+        for (int i = 0; i < x.length(); i++) {
+            if (x.charAt(i) == '.' || x.charAt(i) == '!' || x.charAt(i) == '?') {
+                c++;
+            }
+        }
+        System.out.println(c);
     }
 }
