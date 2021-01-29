@@ -25,7 +25,6 @@ public class Task7 {
             System.out.println("Please enter a line!");
             s = sc.nextLine();
         } while (s.length() <= 0);
-        System.out.println("s=" + s);
         return s;
     }
 }
