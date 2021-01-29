@@ -7,24 +7,32 @@ import java.util.Scanner;
 
 public class Task8 {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+        String s = inputString();
+        int max = 0;
+        int c = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) != ' ') {
+                c++;
+            } else {
+                if (max < c) {
+                    max = c;
+                }
+                c = 0;
+            }
+        }
+        if (max < c) {
+            max = c;
+        }
+        System.out.println(max);
+    }
+
+    static String inputString() {
         String s;
+        Scanner sc = new Scanner(System.in);
         do {
             System.out.println("Please enter a line!");
             s = sc.nextLine();
         } while (s.length() <= 0);
-        System.out.println("s=" + s);
-        String[] arr = s.split("\\s+");
-        System.out.println("** \"" + arr[maxLength(arr)] + "\" has max length");
-    }
-
-    static int maxLength(String [] a) {
-        int max = 0;
-        for (int i = 1; i < a.length; i++) {
-            if (a[i].length() > a[max].length()) {
-                max = i;
-            }
-        }
-        return max;
+        return s;
     }
 }
