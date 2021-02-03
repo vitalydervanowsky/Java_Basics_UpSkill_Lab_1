@@ -6,8 +6,8 @@ package by.string.regex;
 // * отсортировать лексемы в предложении по убыванию количества вхождений заданного символа,
 //   а в случае равенства – по алфавиту.
 
-import java.util.Arrays;
 import java.util.Scanner;
+import java.util.StringJoiner;
 
 public class Task1 {
     public static void main(String[] args) {
@@ -20,40 +20,23 @@ public class Task1 {
                 "интерес какому-либо высказыванию, мысли).\n" +
                 "Устаревшее значение лексемы — это группа ассоциированных слов. Сейчас в данном значении используют " +
                 "термин семантическое поле.";
-//        String str = "с сс ссс сссс ссввсс";
         System.out.println(str);
-        String [] paragraphs = splitIntoParagraphs(str);
         Scanner sc = new Scanner(System.in);
         int choose = sc.nextInt();
-//int choose = 3;
+        sc.close();
+//        int choose = 3;
         switch (choose) {
             case 1 : {
-                int [] sentencesInParagraph = new int[paragraphs.length];
-                for (int i = 0; i < paragraphs.length; i++) {
-                    String [] sentences = splitIntoSentences(paragraphs[i]);
-                    sentencesInParagraph[i] = sentences.length;
-                    System.out.println("[" + sentencesInParagraph[i] + "]" + paragraphs[i].substring(0, 20));
-                }
-                System.out.println("=== сортировка абзацов по количеству предложений: ===");
-                show(sort123(paragraphs, sentencesInParagraph));
+                sortParagraphsByNumberOfSentences(str);
                 break;
             }
             case 2 : {
-                System.out.println("=== сортировка предложений по длине слов: ===");
-                for (String paragraph : paragraphs) {
-                    String[] sentences = splitIntoSentences(paragraph);
-                    for (String sentence : sentences) {
-                        String [] words = splitIntoWords(sentence);
-                        show(sort123(words, findOutTheLength(words)), " ");
-                    }
-                    System.out.println();
-                }
+                sortWordsInSentencesByLength(str);
                 break;
             }
             case 3 : {
-                char find = 'с'; // с кириллическая
-                System.out.println("=== сортировка лексем в предложениях по количеству вхождений символа '" + find + "' : ===");
-                findAndSort(paragraphs, find);
+                char find = '('; // с кириллическая
+                findSymbolAndSort(str, find);
                 break;
             }
             default: {
@@ -62,11 +45,38 @@ public class Task1 {
         }
     }
 
-    static void findAndSort(String [] arrayOfStrings, char symbol) {
-        for (String paragraph : arrayOfStrings) {
+    static void sortParagraphsByNumberOfSentences(String str) {
+        System.out.println("=== сортировка абзацов по количеству предложений: ===");
+        String [] paragraphs = splitIntoParagraphs(str);
+        int [] sentencesInParagraph = new int[paragraphs.length];
+        for (int i = 0; i < paragraphs.length; i++) {
+            String [] sentences = splitIntoSentences(paragraphs[i]);
+            sentencesInParagraph[i] = sentences.length;
+            System.out.println("[" + sentencesInParagraph[i] + "]" + paragraphs[i].substring(0, 20));
+        }
+        show(sort123(paragraphs, sentencesInParagraph));
+    }
+
+    static void sortWordsInSentencesByLength(String str) {
+        System.out.println("=== сортировка предложений по длине слов: ===");
+        String [] paragraphs = splitIntoParagraphs(str);
+        for (String paragraph : paragraphs) {
             String[] sentences = splitIntoSentences(paragraph);
             for (String sentence : sentences) {
-                String[] words = splitIntoWords(sentence);
+                String [] words = splitIntoWords(sentence);
+                show(sort123(words, findOutTheLength(words)), " ");
+            }
+            System.out.println();
+        }
+    }
+
+    static void findSymbolAndSort(String str, char symbol) {
+        System.out.println("=== сортировка лексем в предложениях по количеству вхождений символа '" + symbol + "' : ===");
+        String [] paragraphs = splitIntoParagraphs(str);
+        for (int i = 0; i < paragraphs.length; i++) {
+            String[] sentences = splitIntoSentences(paragraphs[i]);
+            for (int i1 = 0; i1 < sentences.length; i1++) {
+                String[] words = splitIntoWords(sentences[i1]);
                 int[] numberOfOccurrences = new int[words.length];
                 for (int j = 0; j < words.length; j++) {
                     for (int k = 0; k < words[j].length(); k++) {
@@ -74,17 +84,30 @@ public class Task1 {
                             numberOfOccurrences[j]++;
                         }
                     }
-//                    System.out.print(words[j] + numberOfOccurrences[j] + " ");
                 }
-//                System.out.println();
-                sort321(words, numberOfOccurrences);
-                sentence = Arrays.toString(words);
-                System.out.println(sentence);
+                boolean hasEqualOccurrences = true;
+                int firstNumberOfOccurrences = numberOfOccurrences[0];
+                for (int j = 1; j < numberOfOccurrences.length; j++) {
+                    hasEqualOccurrences = hasEqualOccurrences && firstNumberOfOccurrences == numberOfOccurrences[j];
+                }
+                if (hasEqualOccurrences) {
+                    sortAbc(words);
+                } else {
+                    sort321(words, numberOfOccurrences);
+                }
+                sentences[i1] = joinStrings(words);
             }
-//            paragraph = Arrays.toString(sentences);
-//            System.out.println(paragraph);
+            paragraphs[i] = joinStrings(sentences);
+            System.out.println(paragraphs[i]);
         }
-//        show(arrayOfStrings);
+    }
+
+    static String joinStrings(String [] arrayOfStrings) {
+        StringJoiner sj = new StringJoiner(" ");
+        for (String arrayOfString : arrayOfStrings) {
+            sj.add(arrayOfString);
+        }
+        return sj.toString();
     }
 
     static String [] splitIntoParagraphs(String str) {
@@ -92,7 +115,7 @@ public class Task1 {
     }
 
     static String [] splitIntoSentences(String paragraph) {
-        return paragraph.split("[.!?]");
+        return paragraph.split("[\\.!\\?]");
     }
 
     static String [] splitIntoWords(String sentence) {
@@ -138,10 +161,17 @@ public class Task1 {
         }
     }
 
-    static String sortWordByAbc(String s) {
-        char[] charArray = s.toCharArray();
-        Arrays.sort(charArray);
-        return new String(charArray);
+    static void sortAbc(String [] arrayOfStrings) {
+        String tempString;
+        for (int i = 0; i < arrayOfStrings.length; i++) {
+            for (int j = i + 1; j < arrayOfStrings.length; j++) {
+                if (arrayOfStrings[i].compareToIgnoreCase(arrayOfStrings[j]) > 0) {
+                    tempString = arrayOfStrings[i];
+                    arrayOfStrings[i] = arrayOfStrings[j];
+                    arrayOfStrings[j] = tempString;
+                }
+            }
+        }
     }
 
     static void show(String [] array, String separator) {
