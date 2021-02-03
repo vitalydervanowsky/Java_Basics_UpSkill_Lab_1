@@ -24,7 +24,6 @@ public class Task1 {
         Scanner sc = new Scanner(System.in);
         int choose = sc.nextInt();
         sc.close();
-//        int choose = 3;
         switch (choose) {
             case 1 : {
                 sortParagraphsByNumberOfSentences(str);
@@ -35,7 +34,7 @@ public class Task1 {
                 break;
             }
             case 3 : {
-                char find = '('; // с кириллическая
+                char find = '(';
                 findSymbolAndSort(str, find);
                 break;
             }
@@ -122,7 +121,7 @@ public class Task1 {
         return sentence.split("\\s");
     }
 
-    static int [] findOutTheLength(String [] a) { // поиск длины слова
+    static int [] findOutTheLength(String [] a) {
         int [] length = new int[a.length];
         for (int i = 0; i < a.length; i++) {
             length[i] = a[i].length();
