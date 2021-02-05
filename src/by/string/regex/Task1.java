@@ -8,6 +8,8 @@ package by.string.regex;
 
 import java.util.Scanner;
 import java.util.StringJoiner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Task1 {
     public static void main(String[] args) {
@@ -49,8 +51,10 @@ public class Task1 {
         String [] paragraphs = splitIntoParagraphs(str);
         int [] sentencesInParagraph = new int[paragraphs.length];
         for (int i = 0; i < paragraphs.length; i++) {
-            String [] sentences = splitIntoSentences(paragraphs[i]);
-            sentencesInParagraph[i] = sentences.length;
+            Matcher m = Pattern.compile("[\\.!\\?]").matcher(paragraphs[i]);
+            while (m.find()) {
+                sentencesInParagraph[i]++;
+            }
             System.out.println("[" + sentencesInParagraph[i] + "]" + paragraphs[i].substring(0, 20));
         }
         show(sort123(paragraphs, sentencesInParagraph));
@@ -58,10 +62,12 @@ public class Task1 {
 
     static void sortWordsInSentencesByLength(String str) {
         System.out.println("=== сортировка предложений по длине слов: ===");
-        String [] paragraphs = splitIntoParagraphs(str);
-        for (String paragraph : paragraphs) {
-            String[] sentences = splitIntoSentences(paragraph);
-            for (String sentence : sentences) {
+        Matcher mp = Pattern.compile(".*[.?!]").matcher(str);
+        while (mp.find()) {
+            String paragraph = mp.group();
+            Matcher ms = Pattern.compile("([^\\?\\.!]*[\\?\\.!]+)").matcher(paragraph);
+            while (ms.find()) {
+                String sentence = ms.group();
                 String [] words = splitIntoWords(sentence);
                 show(sort123(words, findOutTheLength(words)), " ");
             }
@@ -71,33 +77,37 @@ public class Task1 {
 
     static void findSymbolAndSort(String str, char symbol) {
         System.out.println("=== сортировка лексем в предложениях по количеству вхождений символа '" + symbol + "' : ===");
-        String [] paragraphs = splitIntoParagraphs(str);
-        for (int i = 0; i < paragraphs.length; i++) {
-            String[] sentences = splitIntoSentences(paragraphs[i]);
-            for (int i1 = 0; i1 < sentences.length; i1++) {
-                String[] words = splitIntoWords(sentences[i1]);
-                int[] numberOfOccurrences = new int[words.length];
-                for (int j = 0; j < words.length; j++) {
-                    for (int k = 0; k < words[j].length(); k++) {
-                        if (words[j].charAt(k) == symbol) {
-                            numberOfOccurrences[j]++;
+        Matcher mp = Pattern.compile(".*[.?!]").matcher(str);
+        while (mp.find()) {
+            String paragraph = mp.group();
+            Matcher ms = Pattern.compile("([^\\?\\.!\\n]*)").matcher(paragraph);
+            while (ms.find()) {
+                String sentence = ms.group();
+                if (!sentence.isEmpty()) {
+                    String [] words = splitIntoWords(sentence);
+                    int[] numberOfOccurrences = new int[words.length];
+                    for (int j = 0; j < words.length; j++) {
+                        for (int k = 0; k < words[j].length(); k++) {
+                            if (words[j].charAt(k) == symbol) {
+                                numberOfOccurrences[j]++;
+                            }
                         }
                     }
+                    boolean hasEqualOccurrences = true;
+                    int firstNumberOfOccurrences = numberOfOccurrences[0];
+                    for (int j = 1; j < numberOfOccurrences.length; j++) {
+                        hasEqualOccurrences = hasEqualOccurrences && firstNumberOfOccurrences == numberOfOccurrences[j];
+                    }
+                    if (hasEqualOccurrences) {
+                        sortAbc(words);
+                    } else {
+                        sort321(words, numberOfOccurrences);
+                    }
+                    sentence = joinStrings(words);
+                    System.out.print(sentence + " ");
                 }
-                boolean hasEqualOccurrences = true;
-                int firstNumberOfOccurrences = numberOfOccurrences[0];
-                for (int j = 1; j < numberOfOccurrences.length; j++) {
-                    hasEqualOccurrences = hasEqualOccurrences && firstNumberOfOccurrences == numberOfOccurrences[j];
-                }
-                if (hasEqualOccurrences) {
-                    sortAbc(words);
-                } else {
-                    sort321(words, numberOfOccurrences);
-                }
-                sentences[i1] = joinStrings(words);
             }
-            paragraphs[i] = joinStrings(sentences);
-            System.out.println(paragraphs[i]);
+            System.out.println();
         }
     }
 
@@ -111,10 +121,6 @@ public class Task1 {
 
     static String [] splitIntoParagraphs(String str) {
         return str.split("\\n");
-    }
-
-    static String [] splitIntoSentences(String paragraph) {
-        return paragraph.split("[\\.!\\?]");
     }
 
     static String [] splitIntoWords(String sentence) {
@@ -133,12 +139,8 @@ public class Task1 {
         for (int i = 0; i < numbers.length; i++) {
             for (int j = 0; j < numbers.length; j++) {
                 if (numbers[i] < numbers[j]) {
-                    String tempString = arrayOfStrings[i];
-                    arrayOfStrings[i] = arrayOfStrings[j];
-                    arrayOfStrings[j] = tempString;
-                    int tempInt = numbers[i];
-                    numbers[i] = numbers[j];
-                    numbers[j] = tempInt;
+                    swap(arrayOfStrings, i, j);
+                    swap(numbers, i, j);
                 }
             }
         }
@@ -149,28 +151,33 @@ public class Task1 {
         for (int i = 0; i < numbers.length; i++) {
             for (int j = 0; j < numbers.length; j++) {
                 if (numbers[i] > numbers[j]) {
-                    String tempString = arrayOfStrings[i];
-                    arrayOfStrings[i] = arrayOfStrings[j];
-                    arrayOfStrings[j] = tempString;
-                    int tempInt = numbers[i];
-                    numbers[i] = numbers[j];
-                    numbers[j] = tempInt;
+                    swap(arrayOfStrings, i, j);
+                    swap(numbers, i, j);
                 }
             }
         }
     }
 
     static void sortAbc(String [] arrayOfStrings) {
-        String tempString;
         for (int i = 0; i < arrayOfStrings.length; i++) {
             for (int j = i + 1; j < arrayOfStrings.length; j++) {
                 if (arrayOfStrings[i].compareToIgnoreCase(arrayOfStrings[j]) > 0) {
-                    tempString = arrayOfStrings[i];
-                    arrayOfStrings[i] = arrayOfStrings[j];
-                    arrayOfStrings[j] = tempString;
+                    swap(arrayOfStrings, i, j);
                 }
             }
         }
+    }
+
+    static <T> void swap(T[] a, int i, int j) {
+        T t = a[i];
+        a[i] = a[j];
+        a[j] = t;
+    }
+
+    static void swap(int [] a, int i, int j) {
+        int t = a[i];
+        a[i] = a[j];
+        a[j] = t;
     }
 
     static void show(String [] array, String separator) {
