@@ -83,31 +83,36 @@ public class Task1 {
             Matcher ms = Pattern.compile("([^\\?\\.!\\n]*)").matcher(paragraph);
             while (ms.find()) {
                 String sentence = ms.group();
-                if (!sentence.isEmpty()) {
-                    String [] words = splitIntoWords(sentence);
-                    int[] numberOfOccurrences = new int[words.length];
-                    for (int j = 0; j < words.length; j++) {
-                        for (int k = 0; k < words[j].length(); k++) {
-                            if (words[j].charAt(k) == symbol) {
-                                numberOfOccurrences[j]++;
-                            }
-                        }
-                    }
-                    boolean hasEqualOccurrences = true;
-                    int firstNumberOfOccurrences = numberOfOccurrences[0];
-                    for (int j = 1; j < numberOfOccurrences.length; j++) {
-                        hasEqualOccurrences = hasEqualOccurrences && firstNumberOfOccurrences == numberOfOccurrences[j];
-                    }
-                    if (hasEqualOccurrences) {
-                        sortAbc(words);
-                    } else {
-                        sort321(words, numberOfOccurrences);
-                    }
-                    sentence = joinStrings(words);
-                    System.out.print(sentence + " ");
+                if (sentence.isEmpty()) {
+                    continue;
                 }
+                String [] words = splitIntoWords(sentence);
+                int[] numberOfOccurrences = new int[words.length];
+                fillNumberOfOccurrences(numberOfOccurrences, words, symbol);
+                boolean hasEqualOccurrences = true;
+                int firstNumberOfOccurrences = numberOfOccurrences[0];
+                for (int j = 1; j < numberOfOccurrences.length; j++) {
+                    hasEqualOccurrences = hasEqualOccurrences && firstNumberOfOccurrences == numberOfOccurrences[j];
+                }
+                if (hasEqualOccurrences) {
+                    sortAbc(words);
+                } else {
+                    sort321(words, numberOfOccurrences);
+                }
+                sentence = joinStrings(words);
+                System.out.print(sentence + " ");
             }
             System.out.println();
+        }
+    }
+
+    static void fillNumberOfOccurrences(int [] nums, String [] str, char symbol) {
+        for (int j = 0; j < str.length; j++) {
+            for (int k = 0; k < str[j].length(); k++) {
+                if (str[j].charAt(k) == symbol) {
+                    nums[j]++;
+                }
+            }
         }
     }
 
