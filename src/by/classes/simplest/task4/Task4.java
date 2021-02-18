@@ -6,6 +6,8 @@ package by.classes.simplest.task4;
 // Добавьте возможность сортировки массив по пункту назначения, причем поезда с одинаковыми пунктами
 // назначения должны быть упорядочены по времени отправления.
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Task4 {
@@ -78,40 +80,12 @@ public class Task4 {
     }
 
     static void sortTrainsByDestination(Train [] t) {
-        for (int i = 0; i < t.length; i++) {
-            for (int j = 0; j < t.length; j++) {
-                if (t[j].getDestination().compareToIgnoreCase(t[i].getDestination()) > 0) {
-                    swapTrains(t, i, j);
-                } else {
-                    if (t[j].getDestination().equals(t[i].getDestination()) && t[j].getTime() > t[i].getTime()) {
-                        swapTrains(t, i, j);
-                    }
-                }
-            }
-        }
+        Arrays.sort(t, Comparator.comparing(Train::getDestination));
         showTrains(t);
     }
 
     static void sortTrainsByNo(Train [] t) {
-        for (int i = 0; i < t.length; i++) {
-            for (int j = 0; j < t.length; j++) {
-                if (t[i].getTrainNumber() < t[j].getTrainNumber()) {
-                    swapTrains(t, i, j);
-                }
-            }
-        }
+        Arrays.sort(t, Comparator.comparing(Train::getTrainNumber));
         showTrains(t);
-    }
-
-    static void swapTrains(Train [] t, int i, int j) {
-        String tempDestination = t[i].getDestination();
-        t[i].setDestination(t[j].getDestination());
-        t[j].setDestination(tempDestination);
-        int tempTrainNumber = t[i].getTrainNumber();
-        t[i].setTrainNumber(t[j].getTrainNumber());
-        t[j].setTrainNumber(tempTrainNumber);
-        int tempTime = t[i].getTime();
-        t[i].setTime(t[j].getTime());
-        t[j].setTime(tempTime);
     }
 }

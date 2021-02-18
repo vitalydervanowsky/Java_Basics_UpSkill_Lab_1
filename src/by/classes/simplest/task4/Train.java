@@ -43,7 +43,7 @@ public class Train {
         return result;
     }
 
-    public void setTime(int time) {
-        this.time = time;
+    public void setTime(int minutes) {
+        this.time = minutes;
     }
 }
