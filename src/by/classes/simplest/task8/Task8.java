@@ -5,7 +5,7 @@ public class Task8 {
         CustomerBase cb = new CustomerBase(5);
         cb.showCustomerBase();
         cb.findCustomersWithCardNo(1000, 5000);
-        cb.sortAbc();
+        cb.sortCustomersByAbc();
         cb.showCustomerBase();
     }
 }

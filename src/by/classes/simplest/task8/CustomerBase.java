@@ -1,5 +1,8 @@
 package by.classes.simplest.task8;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class CustomerBase {
     private final int quantity;
     private final Customer [] customers;
@@ -40,20 +43,8 @@ public class CustomerBase {
         }
     }
 
-    public void sortAbc() {
+    public void sortCustomersByAbc() {
         System.out.println("sorting customer base by abc");
-        for (int i = 0; i < customers.length; i++) {
-            for (int j = i + 1; j < customers.length; j++) {
-                if (customers[i].getSurname().compareToIgnoreCase(customers[j].getSurname()) > 0) {
-                    swap(customers, i, j);
-                }
-            }
-        }
-    }
-
-    static <T> void swap(T[] a, int i, int j) {
-        T t = a[i];
-        a[i] = a[j];
-        a[j] = t;
+        Arrays.sort(customers, Comparator.comparing(Customer::getSurname));
     }
 }
