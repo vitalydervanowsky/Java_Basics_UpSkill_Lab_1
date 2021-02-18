@@ -13,7 +13,7 @@ public class Counter {
     }
 
     public Counter() {
-        this.count = 0;
+        this(0);
     }
 
     public Counter(int count) {
