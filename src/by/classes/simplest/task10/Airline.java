@@ -1,7 +1,5 @@
 package by.classes.simplest.task10;
 
-import by.classes.simplest.task6.Time;
-
 public class Airline {
     private final String destination;
     private final int flightNumber;
@@ -18,8 +16,7 @@ public class Airline {
     }
 
     public String toString() {
-        Time time = new Time();
-        time.setTime(this.time);
+        Time time = new Time(this.time);
         return "destination='" + destination + '\'' +
                 "\tflightNumber=" + flightNumber +
                 "\tplaneType='" + planeType + '\'' +

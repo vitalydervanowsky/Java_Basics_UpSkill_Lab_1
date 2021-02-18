@@ -1,7 +1,5 @@
 package by.classes.simplest.task10;
 
-import by.classes.simplest.task6.Time;
-
 public class AirlineBase {
     private final int quantity;
     private final Airline [] airlines;
@@ -20,7 +18,7 @@ public class AirlineBase {
             String destination = "Moscow";
             int flightNumber = 245 + i;
             String planeType = "A37" + i;
-            int time = (int) (86400 * Math.random());
+            int time = (int) (1440 * Math.random());
             byte dayOfWeek = (byte) (7 - i);
             if (quantity == cities.length) {
                 destination = cities[i];
@@ -56,12 +54,11 @@ public class AirlineBase {
         }
     }
 
-    public void showAtDayAndTime(int day, int time) {
-        Time t = new Time();
-        t.setTime(time);
+    public void showAtDayAndTime(int day, int minutes) {
+        Time t = new Time(minutes);
         System.out.println("searching airlines at day " + day + " and time after " + t.toString());
         for (Airline airline : airlines) {
-            if (airline.getDayOfWeek() == day && airline.getTime() > time) {
+            if (airline.getDayOfWeek() == day && airline.getTime() > minutes) {
                 System.out.println(airline.toString());
             }
         }

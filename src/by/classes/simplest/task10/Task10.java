@@ -6,6 +6,6 @@ public class Task10 {
         ab.show();
         ab.showToDestination("Moscow");
         ab.showAtDay(4);
-        ab.showAtDayAndTime(4, 30000);
+        ab.showAtDayAndTime(4, 300);
     }
 }
