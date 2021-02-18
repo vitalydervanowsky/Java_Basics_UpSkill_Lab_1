@@ -5,10 +5,15 @@ package by.classes.simplest.task7;
 
 public class Task7 {
     public static void main(String[] args) {
-        Triangle t = new Triangle();
-        System.out.println("perimeter =\t" + t.perimeter());
-        System.out.println("square =\t" + t.square());
-        Point medianIntersection = t.findOutMedianIntersection();
+        Point[] points = new Point[3];
+        points[0] = new Point(0, 0);
+        points[1] = new Point(3, 0);
+        points[2] = new Point(0, 4);
+        Triangle triangle = new Triangle(points);
+        triangle.showPoints();
+        System.out.println("perimeter =\t" + triangle.perimeter());
+        System.out.println("square =\t" + triangle.square());
+        Point medianIntersection = triangle.findOutMedianIntersection();
         System.out.println("medianIntersection" + medianIntersection.toString());
     }
 }

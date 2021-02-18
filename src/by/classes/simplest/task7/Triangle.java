@@ -4,15 +4,16 @@ package by.classes.simplest.task7;
 // периметра и точки пересечения медиан.
 
 public class Triangle {
-    Point [] points = initPoints();
+    Point [] points;
 
-    public Point [] initPoints() {
-        Point [] points = new Point[3];
-        for (int i = 0; i < 3; i++) {
-            points[i] = new Point((int)(10 * Math.random()), (int)(10 * Math.random()));
-            System.out.println("point" + i + points[i].toString());
+    public Triangle(Point[] points) {
+        this.points = points;
+    }
+
+    public void showPoints() {
+        for (int i = 0; i < points.length; i++) {
+            System.out.println("point" + i + "(" + points[i].getX() + ", " + points[i].getY() + ")");
         }
-        return points;
     }
 
     public double length(Point a, Point b) {
