@@ -1,33 +1,43 @@
 package by.classes.aggregation.task1;
 
-// Создать объект класса Текст, используя классы Предложение, Слово.
-// Методы: дополнить текст, вывести на консоль текст, заголовок текста.
+import java.util.Arrays;
 
 public class Text {
-    private final String title;
-    private String text = "";
+    private String header;
+    private Sentence[] sentences;
 
-    public Text() {
-        title = "";
+    public String getHeader() {
+        return header;
     }
 
-    public Text(String title) {
-        this.title = title;
+    public void setHeader(String header) {
+        this.header = header;
     }
 
-    public String getTitle() {
-        return title;
+    public String getSentences() {
+        return Arrays.toString(sentences);
     }
 
-    public String getText() {
-        return text;
+    public void setSentences(Sentence[] sentences) {
+        this.sentences = sentences;
     }
 
-    public String show() {
-        return getTitle() + "\n" + getText();
+    public void getText() {
+        System.out.println(getHeader());
+        System.out.println(getSentences());
     }
 
-    public void addText(String text) {
-        this.text += text + "\n";
+    public void addSentence(Sentence sentence) {
+        int newLength = sentences.length + 1;
+        Sentence[] newSentences = new Sentence[newLength];
+        for (int i = 0; i < newLength; i++) {
+            newSentences[i] = new Sentence();
+            if (i < sentences.length) {
+                newSentences[i] = sentences[i];
+            } else {
+                newSentences[i] = sentence;
+            }
+        }
+        sentences = newSentences;
     }
 }
