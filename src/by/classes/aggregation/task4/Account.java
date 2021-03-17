@@ -4,19 +4,19 @@ package by.classes.aggregation.task4;
 //  Реализовать поиск и сортировку счетов. Вычисление общей суммы по счетам. Вычисление суммы по
 //  всем счетам, имеющим положительный и отрицательный балансы отдельно.
 
-public class Account {
-    private double current;
+public class Account implements Comparable<Account> {
+    private int current;
     private boolean blocked;
 
-    public Account(double current) {
+    public Account(int current) {
         this.current = current;
     }
 
-    public double getCurrent() {
+    public int getCurrent() {
         return current;
     }
 
-    public void setCurrent(double current) {
+    public void setCurrent(int current) {
         this.current = current;
     }
 
@@ -34,7 +34,12 @@ public class Account {
 
     @Override
     public String toString() {
-        String blocked = isBlocked() ? "blocked" : "unblocked";
-        return getCurrent() + "\t" + blocked;
+        String blocked = isBlocked() ? " blocked" : " unblocked";
+        return getCurrent() + blocked;
+    }
+
+    @Override
+    public int compareTo(Account o) {
+        return o.getCurrent() - this.getCurrent();
     }
 }
