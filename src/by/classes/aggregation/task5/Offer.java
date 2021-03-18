@@ -6,13 +6,6 @@ public class Offer {
     private final int meals;
     private final int days;
 
-    public Offer() {
-        type = 0;
-        transport = 0;
-        meals = 0;
-        days = 0;
-    }
-
     public Offer(int type, int transport, int meals, int days) {
         this.type = type;
         this.transport = transport;
@@ -20,8 +13,24 @@ public class Offer {
         this.days = days;
     }
 
+    public int getType() {
+        return type;
+    }
+
+    public int getTransport() {
+        return transport;
+    }
+
+    public int getMeals() {
+        return meals;
+    }
+
+    public int getDays() {
+        return days;
+    }
+
     public String getOfferType() {
-        switch (type) {
+        switch (getType()) {
             case 0: return "relaxation";
             case 1: return "excursion";
             case 2: return "treatment";
@@ -43,27 +52,11 @@ public class Offer {
     }
 
     public String getMealsType() {
-        if (meals == 0) {
+        if (getMeals() == 0) {
             return "without meals";
         } else {
             return "with meals";
         }
-    }
-
-    public int getDays() {
-        return days;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public int getTransport() {
-        return transport;
-    }
-
-    public int getMeals() {
-        return meals;
     }
 
     @Override
