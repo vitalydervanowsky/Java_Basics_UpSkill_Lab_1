@@ -1,4 +1,7 @@
 package by.classes.aggregation.task3;
 
-public class District {
+public class District extends Territory {
+//    public District() {
+//        super();
+//    }
 }
