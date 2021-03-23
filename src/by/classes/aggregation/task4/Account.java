@@ -16,10 +16,6 @@ public class Account implements Comparable<Account> {
         return current;
     }
 
-    public void setCurrent(int current) {
-        this.current = current;
-    }
-
     public void block() {
         blocked = true;
     }
