@@ -3,15 +3,10 @@ package by.classes.aggregation.task5;
 import java.util.ArrayList;
 
 public class OfferBase {
-    private int quantity;
     private ArrayList<Offer> offers;
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public OfferBase(ArrayList<Offer> offers) {
+        this.offers = offers;
     }
 
     public ArrayList<Offer> getOffers() {

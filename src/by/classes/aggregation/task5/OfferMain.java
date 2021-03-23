@@ -26,16 +26,16 @@ public class OfferMain {
         print(offerBase);
     }
 
-    private static OfferBase createBase(int i) {
-        OfferBase offerBase = new OfferBase();
-        offerBase.setQuantity(i);
+    private static OfferBase createBase(int quantity) {
         ArrayList<Offer> offers = new ArrayList<>();
-        for (int j = 0; j < offerBase.getQuantity(); j++) {
-            Offer offer = new Offer(r(5), r(5), r(2), (2 + r(12)));
+        for (int i = 0; i < quantity; i++) {
+            Offer offer = new Offer(OfferType.values()[r(5)],
+                    OfferTransport.values()[r(5)],
+                    OfferMeals.values()[r(2)],
+                    (2 + r(12)));
             offers.add(offer);
         }
-        offerBase.setOffers(offers);
-        return offerBase;
+        return new OfferBase(offers);
     }
 
     private static int r(int i) {
@@ -43,47 +43,52 @@ public class OfferMain {
     }
 
     private static void print(OfferBase offerBase) {
+        System.out.println("> list of offers");
         ArrayList<Offer> offers = offerBase.getOffers();
         for (Offer offer : offers) {
             System.out.println(offer);
         }
-        System.out.println(".");
+        System.out.println();
     }
 
     private static void printOffersWithType(OfferBase offerBase, int type) {
-        ArrayList<Offer> offers = offerBase.getOffers();
-        for (Offer offer : offers) {
-            if (offer.getType() == type) {
+        System.out.println("> searching offers for type = " + OfferType.values()[type]);
+        for (Offer offer : offerBase.getOffers()) {
+            if (offer.getType().getIndex() == type) {
                 System.out.println(offer.toString());
             }
         }
+        System.out.println();
     }
 
     private static void printOffersWithTransport(OfferBase offerBase, int transport) {
-        ArrayList<Offer> offers = offerBase.getOffers();
-        for (Offer offer : offers) {
-            if (offer.getTransport() == transport) {
+        System.out.println("> searching offers for transport = " + OfferTransport.values()[transport]);
+        for (Offer offer : offerBase.getOffers()) {
+            if (offer.getTransport().getIndex() == transport) {
                 System.out.println(offer.toString());
             }
         }
+        System.out.println();
     }
 
     private static void printOffersWithMeals(OfferBase offerBase, int meals) {
-        ArrayList<Offer> offers = offerBase.getOffers();
-        for (Offer offer : offers) {
-            if (offer.getMeals() == meals) {
+        System.out.println("> searching offers for meals = " + OfferMeals.values()[meals]);
+        for (Offer offer : offerBase.getOffers()) {
+            if (offer.getMeals().getIndex() == meals) {
                 System.out.println(offer.toString());
             }
         }
+        System.out.println();
     }
 
     private static void printOffersDuringForMore(OfferBase offerBase, int days) {
-        ArrayList<Offer> offers = offerBase.getOffers();
-        for (Offer offer : offers) {
+        System.out.println("> searching offers during for more = " + days);
+        for (Offer offer : offerBase.getOffers()) {
             if (offer.getDays() >= days) {
                 System.out.println(offer.toString());
             }
         }
+        System.out.println();
     }
 
     private static void sortOffersByType(OfferBase offerBase) {
