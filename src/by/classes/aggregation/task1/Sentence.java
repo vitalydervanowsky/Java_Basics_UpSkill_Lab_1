@@ -1,9 +1,9 @@
 package by.classes.aggregation.task1;
 
 public class Sentence {
-    private Word[] words;
+    private final Word[] words;
 
-    public void setSentence(Word[] words) {
+    public Sentence(Word[] words) {
         this.words = words;
     }
 

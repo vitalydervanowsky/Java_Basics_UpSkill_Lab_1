@@ -5,11 +5,9 @@ package by.classes.aggregation.task1;
 
 public class Main {
     public static void main(String[] args) {
-        Text text = initText();
+        Text text = new Text("header of the text", initSentences());
         text.getText();
-        Word[] words = initWords();
-        Sentence sentence = new Sentence();
-        sentence.setSentence(words);
+        Sentence sentence = new Sentence(initWords());
         text.addSentence(sentence);
         text.getText();
     }
@@ -18,8 +16,7 @@ public class Main {
         int rand = (int)(15 * Math.random() + 1);
         Word[] words = new Word[rand];
         for (int i = 0; i < rand; i++) {
-            words[i] = new Word();
-            words[i].setWord("word" + (i + 1));
+            words[i] = new Word("word" + (i + 1));
         }
         return words;
     }
@@ -28,17 +25,8 @@ public class Main {
         int rand = (int)(5 * Math.random() + 1);
         Sentence[] sentences = new Sentence[rand];
         for (int i = 0; i < rand; i++) {
-            Word[] w = initWords();
-            sentences[i] = new Sentence();
-            sentences[i].setSentence(w);
+            sentences[i] = new Sentence(initWords());
         }
         return sentences;
-    }
-
-    private static Text initText() {
-        Text text = new Text();
-        text.setHeader("header of the text");
-        text.setSentences(initSentences());
-        return text;
     }
 }
