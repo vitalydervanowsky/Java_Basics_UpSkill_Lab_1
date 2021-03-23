@@ -7,8 +7,7 @@ public class Main {
     public static void main(String[] args) {
         Engine engine = new Engine("DuratecHE", 1997, 145);
         Wheel wheel = new Wheel(205, 55, 16);
-        Car car = new Car(engine, wheel);
-        car.setBrand("Ford");
+        Car car = new Car("Ford", engine, wheel);
         System.out.println("My new car is " + car.getBrand());
         car.ride();
         car.refuel();

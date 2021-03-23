@@ -1,11 +1,12 @@
 package by.classes.aggregation.task2;
 
 public class Car {
-    private String brand = "brand";
+    private final String brand;
     private final Engine engine;
     private Wheel wheel;
 
-    public Car(Engine engine, Wheel wheel) {
+    public Car(String brand, Engine engine, Wheel wheel) {
+        this.brand = brand;
         this.engine = engine;
         this.wheel = wheel;
     }
@@ -26,10 +27,6 @@ public class Car {
 
     public String getBrand() {
         return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
     }
 
     @Override

@@ -1,9 +1,9 @@
 package by.classes.aggregation.task2;
 
 public class Wheel {
-    private int width;
-    private int height;
-    private int diameter;
+    private final int width;
+    private final int height;
+    private final int diameter;
 
     public Wheel(int width, int height, int diameter) {
         this.width = width;
@@ -15,24 +15,12 @@ public class Wheel {
         return width;
     }
 
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
     public int getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
     public int getDiameter() {
         return diameter;
-    }
-
-    public void setDiameter(int diameter) {
-        this.diameter = diameter;
     }
 
     @Override
