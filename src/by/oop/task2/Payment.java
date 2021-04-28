@@ -7,11 +7,11 @@ public class Payment {
     private final Date date;
     private final int total;
 
-    public Payment(ArrayList<Basket> basketList) {
+    public Payment(ArrayList<Product> productList) {
         this.date = new Date();
         int total = 0;
-        for (Basket basket : basketList) {
-            total += basket.getQuantity() * basket.getPrice();
+        for (Product product : productList) {
+            total += product.getQuantity() * product.getPrice();
         }
         this.total = total;
     }
