@@ -3,13 +3,13 @@ package by.oop.task3;
 import java.util.ArrayList;
 
 public class Calendar {
-    private ArrayList<Day> days;
+    private final ArrayList<Day> days;
+
+    public Calendar(ArrayList<Day> days) {
+        this.days = days;
+    }
 
     public ArrayList<Day> getDays() {
         return days;
-    }
-
-    public void setDays(ArrayList<Day> days) {
-        this.days = days;
     }
 }

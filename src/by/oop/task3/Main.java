@@ -31,7 +31,6 @@ public class Main {
     }
 
     private static Calendar createCalendar(int year) {
-        Calendar calendar = new Calendar();
         ArrayList<Day> days = new ArrayList<>();
         System.out.print("Holidays: ");
         if (year == 2021) {
@@ -51,7 +50,6 @@ public class Main {
                 days.add(day);
             }
         }
-        calendar.setDays(days);
-        return calendar;
+        return new Calendar(days);
     }
 }

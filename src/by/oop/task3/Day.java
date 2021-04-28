@@ -1,7 +1,7 @@
 package by.oop.task3;
 
 public class Day {
-    private int weekDayNumber;
+    private final int weekDayNumber;
 
     public Day(int weekDayNumber) {
         this.weekDayNumber = weekDayNumber;
@@ -9,9 +9,5 @@ public class Day {
 
     public int getWeekDayNumber() {
         return weekDayNumber;
-    }
-
-    public void setWeekDayNumber(int weekDayNumber) {
-        this.weekDayNumber = weekDayNumber;
     }
 }
