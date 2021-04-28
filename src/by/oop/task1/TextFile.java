@@ -6,12 +6,12 @@ public class TextFile extends File {
     }
 
     public void addLine(String line) {
-        setContent(getContent() + "\n" + line);
+        this.content = getContent() + "\n" + line;
     }
 
     public void delete() {
-        setName("");
-        setDirectory(new Directory(""));
-        setContent("");
+        this.name = null;
+        this.directory = new Directory(null);
+        this.content = null;
     }
 }

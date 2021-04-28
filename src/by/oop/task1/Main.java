@@ -3,13 +3,13 @@ package by.oop.task1;
 public class Main {
     public static void main(String[] args) {
         TextFile textFile = createTextFile();
-        System.out.println(textFile.toString());
-        textFile.setName("newName.txt");
-        System.out.println(textFile.toString());
+        System.out.println(textFile);
+        textFile.rename("newName.txt");
+        System.out.println(textFile);
         textFile.addLine("Создать класс Payment с внутренним классом, с помощью объектов которого можно сформировать покупку из нескольких товаров.");
-        System.out.println(textFile.toString());
+        System.out.println(textFile);
         textFile.delete();
-        System.out.println(textFile.toString());
+        System.out.println(textFile);
     }
 
     public static TextFile createTextFile() {

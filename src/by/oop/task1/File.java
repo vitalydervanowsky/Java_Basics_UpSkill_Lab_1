@@ -1,9 +1,9 @@
 package by.oop.task1;
 
 public class File {
-    private String name = "";
-    private Directory directory;
-    private String content = "";
+    protected String name;
+    protected Directory directory;
+    protected String content;
 
     public File(String name, Directory directory, String content) {
         this.name = name;
@@ -23,16 +23,8 @@ public class File {
         return content;
     }
 
-    public void setName(String name) {
+    public void rename(String name) {
         this.name = name;
-    }
-
-    public void setDirectory(Directory directory) {
-        this.directory = directory;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
     }
 
     @Override
